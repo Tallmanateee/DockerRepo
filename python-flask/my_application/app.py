@@ -1,11 +1,23 @@
+import os
 from flask import Flask
 from flask import request
+from os import listdir
+from os.path import isfile, join
+
 app = Flask(__name__)
+
+@app.route("/")
+def listcur():
+  mypath = ('.')
+  onlyfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
+  liststring=(', '.join(onlyfiles))
+  print (liststring)
+  return 'listcur'
 
 @app.route("/")
 def hello():
     return "Hello World!"
-  
+    
 @app.route("/")
 def index():
     return 'Index Page'
